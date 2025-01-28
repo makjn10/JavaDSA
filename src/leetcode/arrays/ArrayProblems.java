@@ -1,5 +1,7 @@
 package leetcode.arrays;
 
+import java.util.ArrayList;
+
 public class ArrayProblems {
 
 	// https://leetcode.com/problems/remove-duplicates-from-sorted-array/
@@ -96,7 +98,7 @@ public class ArrayProblems {
 		// O(1) SC
 		int index = 0;
 		for (int i = 0; i < nums.length; i++) {
-			if(nums[i] == 0)    continue;
+			if (nums[i] == 0) continue;
 			nums[index++] = nums[i];
 		}
 		for (; index < nums.length; index++) {
@@ -137,5 +139,59 @@ public class ArrayProblems {
 			xor = xor ^ nums[i];
 		}
 		return xor;
+	}
+
+	// https://leetcode.com/problems/merge-sorted-array/
+	public void merge(int[] nums1, int m, int[] nums2, int n) {
+		// O(n + m) TC
+		// O(1) SC
+		int i = m - 1, j = n - 1, k = m + n - 1;
+		while (i >= 0 && j >= 0) {
+			if (nums1[i] > nums2[j]) {
+				nums1[k] = nums1[i];
+				i--;
+			} else {
+				nums1[k] = nums2[j];
+				j--;
+			}
+			k--;
+		}
+		while (i >= 0) {
+			nums1[k] = nums1[i];
+			i--;
+			k--;
+		}
+		while (j >= 0) {
+			nums1[k] = nums2[j];
+			j--;
+			k--;
+		}
+
+		// // TC : O(n + m)
+		// // SC : O(n + m)
+		// ArrayList<Integer> result = new ArrayList<>();
+
+		// int i = 0, j = 0;
+		// while(i < m && j < n) {
+		// 	if (nums1[i] < nums2[j]) {
+		// 		result.add(nums1[i]);
+		// 		i++;
+		// 	} else {
+		// 		result.add(nums2[j]);
+		// 		j++;
+		// 	}
+		// }
+		// while (i < m) {
+		// 	result.add(nums1[i]);
+		// 	i++;
+		// }
+		// while (j < n) {
+		// 	result.add(nums2[j]);
+		// 	j++;
+		// }
+
+		// for (i = 0; i < n + m; i++) {
+		//     nums1[i] = result.get(i);
+		// }
 	}
 }
