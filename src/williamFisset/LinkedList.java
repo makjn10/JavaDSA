@@ -2,14 +2,14 @@ package williamFisset;
 
 // Linked list is a sequential list of nodes that hold data which point to other node also containing data
 // Where are LLs used?
-//	- Many List, Queue and Stack implementations
-//	- Great for creating circular lists
+//	- Many List, Queue and Stack implementations (due to optimum time complexity for addition/deletion)
+//	- Great for creating circular lists (modelling circular problems like round-robin etc.)
 //	- Model real-world objects like trains
 //	- Used in separate chaining (in hashtable implementation to deal with hash collisions)
 //	- Used in implementation od adjacency lists for graphs
 
 // Terminology :
-// Head : The first node in a LL
+// Head : The first node in a LL (we always maintain a reference to it)
 // Tail : The last node in a LL
 // Pointer/Reference : Reference to another node
 // Node : An object containing data and reference
