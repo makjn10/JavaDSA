@@ -30,32 +30,6 @@ public class DynamicArray <T> implements Iterable <T>{
 		return len == 0;
 	}
 
-	public T get(int index) {
-		if(index >= len || index < 0)	throw new IndexOutOfBoundsException();
-		return arr[index];
-	}
-
-	public void set(int index, T ele) {
-		if(index >= len || index < 0)	throw new IndexOutOfBoundsException();
-		arr[index] = ele;
-	}
-
-	public void clear() {
-		for (int i = 0; i < capacity; i++) {
-			arr[i] = null;
-		}
-		len = 0;
-	}
-
-	public int indexOf(T ele) {
-		for (int i = 0; i < len; i++) {
-			if(Objects.equals(ele, arr[i])) {
-				return i;
-			}
-		}
-		return -1;
-	}
-
 	public void add(T ele) {
 		if (len >= capacity) {
 			capacity *= 2;
@@ -66,6 +40,16 @@ public class DynamicArray <T> implements Iterable <T>{
 			arr = newArr;
 		}
 		arr[len++] = ele;
+	}
+
+	public T get(int index) {
+		if(index >= len || index < 0)	throw new IndexOutOfBoundsException();
+		return arr[index];
+	}
+
+	public void set(int index, T ele) {
+		if(index >= len || index < 0)	throw new IndexOutOfBoundsException();
+		arr[index] = ele;
 	}
 
 	public T removeAt(int index) {
@@ -88,6 +72,22 @@ public class DynamicArray <T> implements Iterable <T>{
 			}
 		}
 		return false;
+	}
+
+	public void clear() {
+		for (int i = 0; i < capacity; i++) {
+			arr[i] = null;
+		}
+		len = 0;
+	}
+
+	public int indexOf(T ele) {
+		for (int i = 0; i < len; i++) {
+			if(Objects.equals(ele, arr[i])) {
+				return i;
+			}
+		}
+		return -1;
 	}
 
 	public void reverse() {

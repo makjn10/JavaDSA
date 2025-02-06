@@ -33,6 +33,9 @@ package williamFisset;
 // Cons :
 //	- Takes 2x memory
 
+// Time Complexities
+// 
+
 import williamFisset.implementations.SinglyLinkedList;
 
 public class LinkedList {
@@ -40,25 +43,19 @@ public class LinkedList {
 
 
 		SinglyLinkedList<Integer> singlyLinkedList = new SinglyLinkedList<>();
-		singlyLinkedList.add(1);
-		singlyLinkedList.add(2);
-		singlyLinkedList.add(3);
-		singlyLinkedList.add(6);
-		singlyLinkedList.add(5);
-		singlyLinkedList.add(4);
-
+		singlyLinkedList.insertAtLast(1);
+		singlyLinkedList.insertAtLast(2);
+		singlyLinkedList.insertAtLast(3);
+		singlyLinkedList.insertAtLast(6);
+		singlyLinkedList.insertAtLast(5);
+		singlyLinkedList.insertAtLast(4);
 		singlyLinkedList.printLL();
 
-		singlyLinkedList.addAtPos(20, 1);
-		singlyLinkedList.printLL();
-		singlyLinkedList.addAtPos(21, 2);
-		singlyLinkedList.printLL();
-		singlyLinkedList.addAtPos(22, 9);
+		singlyLinkedList.insertAtFirst(23);
 		singlyLinkedList.printLL();
 
-		// throws exception
-//		singlyLinkedList.addAtPos(23, 11);
-//		singlyLinkedList.printLL();
+		singlyLinkedList.insertAtPos(233, 2);
+		singlyLinkedList.printLL();
 
 	}
 }

@@ -1,5 +1,6 @@
 package williamFisset.implementations;
 
+@SuppressWarnings("unchecked")
 public class SinglyLinkedList<T> {
 	Node<T> head;
 	Node<T> tail;
@@ -9,7 +10,7 @@ public class SinglyLinkedList<T> {
 		tail = null;
 	}
 
-	public void add(T ele) {
+	public void insertAtLast(T ele) {
 		Node<T> newNode = new Node<>(ele);
 		if (head == null) {
 			head = newNode;
@@ -20,29 +21,29 @@ public class SinglyLinkedList<T> {
 		}
 	}
 
-	public void addAtPos(T ele, int pos) {
-		if (pos <= 0) {
-			throw new IllegalArgumentException("Enter positive position");
+	public void insertAtFirst(T ele) {
+		Node<T> newNode = new Node<>(ele);
+		newNode.next = head;
+		head = newNode;
+	}
+
+	// 0 based position
+	public void insertAtPos(T ele, int pos) {
+		if (pos < 0)	throw new IndexOutOfBoundsException();
+		if (pos == 0)	insertAtFirst(ele);
+
+		Node<T> temp = head;
+		int curPos = 0;
+		while (curPos < pos - 1) {
+			if (temp == null)	throw new IndexOutOfBoundsException();
+			temp = temp.next;
+			curPos++;
 		}
+		if (temp == null)	throw new IndexOutOfBoundsException();
 
-		Node<T> newNode = new Node<T>(ele);
-		if (pos == 1) {
-			newNode.next = head;
-			head = newNode;
-		} else {
-			int currPos = 1;
-			Node<T> currNode = head;
-
-			while (currPos < (pos - 1)) {
-				if (currNode == null) throw new IllegalArgumentException("Position greater than length of LL");
-				currNode = currNode.next;
-				currPos++;
-			}
-			if (currNode == null) throw new IllegalArgumentException("Position greater than length of LL");
-
-			newNode.next = currNode.next;
-			currNode.next = newNode;
-		}
+		Node<T> newNode = new Node<>(ele);
+		newNode.next = temp.next;
+		temp.next = newNode;
 	}
 
 	public void printLL() {
