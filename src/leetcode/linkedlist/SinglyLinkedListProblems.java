@@ -1,6 +1,6 @@
-package leetcode.arrays;
+package leetcode.linkedlist;
 
-public class LinkedListProblems {
+public class SinglyLinkedListProblems {
 
 	public class ListNode {
 		int val;
