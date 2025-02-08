@@ -33,29 +33,81 @@ package williamFisset;
 // Cons :
 //	- Takes 2x memory
 
-// Time Complexities
-// 
+// Time Complexities (Singly LL, Doubly LL)
+// Insert at Head : O(1), O(1)
+// Insert at Tail : O(1), O(1)
+// Insert in middle : O(n), O(n)
+// Search : O(n), O(n)
+// Remove at Head : O(1), O(1)
+// Remove at Tail : O(n), O(1)
+// Remove in middle : O(n), O(n)
 
+import williamFisset.implementations.DoublyLinkedList;
 import williamFisset.implementations.SinglyLinkedList;
 
 public class LinkedList {
 	public static void main(String[] args) {
 
-
 		SinglyLinkedList<Integer> singlyLinkedList = new SinglyLinkedList<>();
-		singlyLinkedList.insertAtLast(1);
-		singlyLinkedList.insertAtLast(2);
-		singlyLinkedList.insertAtLast(3);
-		singlyLinkedList.insertAtLast(6);
-		singlyLinkedList.insertAtLast(5);
-		singlyLinkedList.insertAtLast(4);
-		singlyLinkedList.printLL();
+		singlyLinkedList.addLast(1);
+		singlyLinkedList.removeLast();
 
-		singlyLinkedList.insertAtFirst(23);
-		singlyLinkedList.printLL();
+		singlyLinkedList.addLast(2);
+		singlyLinkedList.addLast(3);
+		singlyLinkedList.addLast(6);
+		singlyLinkedList.addLast(5);
+		singlyLinkedList.addLast(4);
+		System.out.println(singlyLinkedList);
+		System.out.println(singlyLinkedList.getSize());
 
-		singlyLinkedList.insertAtPos(233, 2);
-		singlyLinkedList.printLL();
+		singlyLinkedList.addFirst(23);
+		System.out.println(singlyLinkedList);
+		System.out.println(singlyLinkedList.getSize());
 
+		singlyLinkedList.addAt(2, 233);
+		System.out.println(singlyLinkedList);
+		System.out.println(singlyLinkedList.getSize());
+
+		singlyLinkedList.addLast(544);
+		System.out.println(singlyLinkedList);
+		System.out.println(singlyLinkedList.getSize());
+
+		singlyLinkedList.removeAt(0);
+		System.out.println(singlyLinkedList);
+		System.out.println(singlyLinkedList.getSize());
+
+		singlyLinkedList.remove(2);
+		System.out.println(singlyLinkedList);
+		System.out.println(singlyLinkedList.getSize());
+
+		singlyLinkedList.removeLast();
+		System.out.println(singlyLinkedList);
+		System.out.println(singlyLinkedList.getSize());
+
+
+		DoublyLinkedList<Integer> doublyLinkedList = new DoublyLinkedList<>();
+
+		doublyLinkedList.addLast(1);
+		doublyLinkedList.addLast(2);
+		doublyLinkedList.addLast(3);
+
+		System.out.println(doublyLinkedList);
+
+		doublyLinkedList.addAt(0, 0);
+		System.out.println(doublyLinkedList);
+
+		doublyLinkedList.addAt(3, 4);
+		System.out.println(doublyLinkedList);
+
+		doublyLinkedList.removeFirst();
+		doublyLinkedList.removeLast();
+		System.out.println(doublyLinkedList);
+
+		doublyLinkedList.addAt(1, 23);
+		doublyLinkedList.addAt(1, 52);
+		System.out.println(doublyLinkedList);
+
+		doublyLinkedList.removeAt(2);
+		System.out.println(doublyLinkedList);
 	}
 }
