@@ -2,9 +2,7 @@ package geeksforgeeks.arrays;
 
 public class LinkedListProblems {
 
-	// https://www.geeksforgeeks.org/problems/introduction-to-linked-list/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=introduction-to-linked-list
 	// User function Template for Java
-
 	private static class Node {
 		int data;
 		Node next;
@@ -13,6 +11,9 @@ public class LinkedListProblems {
 		Node(int d) { data = d; }  //constructor to create a new node
 	}
 
+	// https://www.geeksforgeeks.org/problems/introduction-to-linked-list/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=introduction-to-linked-list
+	// TC : O(n)
+	// SC : O(1)
 	static Node constructLL(int[] arr) {
 		// code here
 		Node head = null, tail = null;
@@ -25,9 +26,11 @@ public class LinkedListProblems {
 			}
 		}
 		return head;
-
 	}
 
+	// https://www.geeksforgeeks.org/problems/linked-list-insertion-1587115620/0?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=linked-list-insertion
+	// TC : O(n), because tail is not given
+	// SC : O(1)
 	Node insertAtEnd(Node head, int x) {
 		// code here
 		Node newNode = new Node(x);
@@ -43,5 +46,5 @@ public class LinkedListProblems {
 		return head;
 	}
 
-	
+
 }
