@@ -7,6 +7,7 @@ package williamFisset;
 //	- Model real-world objects like trains
 //	- Used in separate chaining (in hashtable implementation to deal with hash collisions)
 //	- Used in implementation od adjacency lists for graphs
+//  - Browsers (DLL can mimic TABS and their order)
 
 // Terminology :
 // Head : The first node in a LL (we always maintain a reference to it)
