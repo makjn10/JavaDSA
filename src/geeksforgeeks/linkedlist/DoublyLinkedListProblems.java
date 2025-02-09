@@ -6,7 +6,7 @@ public class DoublyLinkedListProblems {
 		Node prev;
 		Node next;
 
-		Node (int d) {
+		Node(int d) {
 			data = d;
 			prev = null;
 			next = null;
@@ -66,18 +66,18 @@ public class DoublyLinkedListProblems {
 			temp = temp.next;
 			index++;
 		}
-		
+
 		if (temp.prev == null) {
 			// need to delete head
 			Node newHead = temp.next;
-			if (newHead == null)  return null;
+			if (newHead == null) return null;
 			newHead.prev = null;
 			temp.next = null;
 			return newHead;
 		} else if (temp.next == null) {
 			// need to delete tail
 			Node newTail = temp.prev;
-			if (newTail == null)  return null;
+			if (newTail == null) return null;
 			newTail.next = null;
 			temp.prev = null;
 		} else {

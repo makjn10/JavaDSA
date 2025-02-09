@@ -7,8 +7,13 @@ public class SinglyLinkedListProblems {
 		int data;
 		Node next;
 
-		Node() { data = 0; }
-		Node(int d) { data = d; }  //constructor to create a new node
+		Node() {
+			data = 0;
+		}
+
+		Node(int d) {
+			data = d;
+		}  //constructor to create a new node
 	}
 
 	// https://www.geeksforgeeks.org/problems/introduction-to-linked-list/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=introduction-to-linked-list
@@ -39,7 +44,7 @@ public class SinglyLinkedListProblems {
 		}
 
 		Node temp = head;
-		while(temp.next != null) {
+		while (temp.next != null) {
 			temp = temp.next;
 		}
 		temp.next = newNode;
@@ -53,7 +58,7 @@ public class SinglyLinkedListProblems {
 	// SC : O(n) // no tail call optimization / tail recursion supported in Java
 	public int getCount(Node head) {
 		// code here
-		if (head == null)   return 0;
+		if (head == null) return 0;
 		return 1 + getCount(head.next);
 	}
 
@@ -79,7 +84,7 @@ public class SinglyLinkedListProblems {
 		// Code here
 		Node trav = head;
 		while (trav != null) {
-			if (trav.data == key)   return true;
+			if (trav.data == key) return true;
 			trav = trav.next;
 		}
 		return false;
