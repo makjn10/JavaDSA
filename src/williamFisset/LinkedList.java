@@ -43,6 +43,12 @@ package williamFisset;
 // Remove at Tail : O(n), O(1)
 // Remove in middle : O(n), O(n)
 
+// Things to remember/ patterns :
+// - Never tamper with head, always create a temporary var
+// - Tortoise/hare algorithm
+// - Timer logic and storing timer in hashmap
+// - First think on edge cases and then build on it when dealing with insertion/deletion
+
 import williamFisset.implementations.DoublyLinkedList;
 import williamFisset.implementations.SinglyLinkedList;
 
