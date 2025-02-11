@@ -90,5 +90,45 @@ public class SinglyLinkedListProblems {
 		return false;
 	}
 
+	// https://www.geeksforgeeks.org/problems/find-length-of-loop/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=find-length-of-loop
+	// Function to find the length of a loop in the linked list.
+	public int countNodesinLoop(Node head) {
+		// Add your code here.
+
+		// Tortoise Algo
+		if (head == null || head.next == null)   return 0;
+		Node n1 = head.next, n2 = head.next.next;
+		while (n2 != null && n2.next != null) {
+			if (n1 == n2) {
+				int len = 1;
+				n1 = n1.next;
+				while (n1 != n2) {
+					n1 = n1.next;
+					len++;
+				}
+				return len;
+			}
+			n1 = n1.next;
+			n2 = n2.next.next;
+		}
+		return 0;
+
+
+		// TC : O(n) considering map operations are O(1)
+		// SC : O(n)
+		// HashMap<Node, Integer> mp = new HashMap<>();
+		// Node temp = head;
+		// int timer = 1;
+		// while (temp != null) {
+		//     if(mp.containsKey(temp)) {
+		//         return timer - mp.get(temp);
+		//     }
+		//     mp.put(temp, timer);
+		//     timer++;
+		//     temp = temp.next;
+		// }
+		// return 0;
+	}
+
 
 }

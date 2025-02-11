@@ -102,4 +102,164 @@ public class SinglyLinkedListProblems {
 		}
 		return false;
 	}
+
+	// https://leetcode.com/problems/linked-list-cycle-ii/
+	public ListNode detectCycle(ListNode head) {
+
+		// tortoise algo
+		// TC : O(n)
+		// SC : O(1)
+		if (head == null || head.next == null) return null;
+		ListNode slow = head, fast = head;
+		while (fast != null && fast.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
+			if (slow == fast) {
+				slow = head;
+				while (slow != fast) {
+					slow = slow.next;
+					fast = fast.next;
+				}
+				return slow;
+			}
+		}
+		return null;
+
+		// Using Hashmap
+		// TC : O(n)
+		// SC : O(n)
+		// HashMap<ListNode, Boolean> mp = new HashMap<>();
+		// ListNode trav = head;
+		// while (trav != null) {
+		//     if (mp.containsKey(trav)) {
+		//         return trav;
+		//     }
+		//     mp.put(trav, true);
+		//     trav = trav.next;
+		// }
+		// return null;
+	}
+
+	// https://leetcode.com/problems/palindrome-linked-list/
+	public ListNode checkNode;
+
+	public boolean checkPal(ListNode curr) {
+		if (curr == null) {
+			return true;
+		}
+		boolean checkFurther = checkPal(curr.next);
+		int val = checkNode.val;
+		checkNode = checkNode.next;
+		return checkFurther && (curr.val == val);
+	}
+
+	public ListNode reverseLLIter(ListNode head) {
+		if (head == null || head.next == null) return head;
+		ListNode prev = null, curr = head;
+		while (curr != null) {
+			ListNode temp = curr.next;
+			curr.next = prev;
+			prev = curr;
+			curr = temp;
+		}
+		return prev;
+	}
+
+	public boolean isPalindrome(ListNode head) {
+		// TC : O(2n)
+		// SC : O(1)
+		if (head == null || head.next == null) {
+			return true;
+		}
+		ListNode slow = head, fast = head.next;
+		while (fast != null && fast.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		ListNode newLL = reverseLLIter(slow.next);
+		ListNode temp1 = head, temp2 = newLL;
+		while (temp2 != null) {
+			if (temp2.val != temp1.val) {
+				reverseLLIter(newLL);
+				return false;
+			}
+			temp2 = temp2.next;
+			temp1 = temp1.next;
+		}
+		reverseLLIter(newLL);
+		return true;
+
+		// recursive
+		// TC : O(n)
+		// SC : O(n) recursion stack + 1 global variable
+		// checkNode = head;
+		// return checkPal(head);
+
+		// brute
+		// TC : O(n)
+		// SC : O(n)
+		// ArrayList<Integer> list = new ArrayList<>();
+		// ListNode temp = head;
+
+		// while (temp != null) {
+		//     list.add(temp.val);
+		//     temp = temp.next;
+		// }
+
+		// int i = 0, j = list.size() - 1;
+		// while (i < j) {
+		//     if (list.get(i) != list.get(j)) return false;
+		//     i++;
+		//     j--;
+		// }
+		// return true;
+	}
+
+	// https://leetcode.com/problems/odd-even-linked-list/
+	// TC : O(n)
+	// SC : O(1)
+	public ListNode oddEvenList(ListNode head) {
+		if (head == null || head.next == null || head.next.next == null) {
+			return head;
+		}
+
+		ListNode p1 = head, pHead = head;
+		ListNode p2 = head.next.next;
+		ListNode s1 = head.next, sHead = head.next;
+		ListNode s2 = head.next.next.next;
+
+		p1.next = p2;
+		s1.next = s2;
+		while (s2 != null && s2.next != null) {
+			s1 = s2;
+			p1 = p2;
+			s2 = s2.next.next;
+			p2 = p2.next.next;
+			p1.next = p2;
+			s1.next = s2;
+		}
+		p2.next = sHead;
+		return pHead;
+	}
+
+	// https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+	// TC : O(n)
+	// SC : O(1)
+	public ListNode removeNthFromEnd(ListNode head, int n) {
+		if (head == null || head.next == null) return null;
+		ListNode s = head, p = head;
+
+		int k = n;
+		while (k > 0) {
+			p = p.next;
+			k--;
+		}
+		if (p == null) return head.next;
+		while (p.next != null) {
+			s = s.next;
+			p = p.next;
+		}
+		s.next = s.next.next;
+		return head;
+	}
 }
