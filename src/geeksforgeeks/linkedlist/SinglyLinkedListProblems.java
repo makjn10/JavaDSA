@@ -96,7 +96,7 @@ public class SinglyLinkedListProblems {
 		// Add your code here.
 
 		// Tortoise Algo
-		if (head == null || head.next == null)   return 0;
+		if (head == null || head.next == null) return 0;
 		Node n1 = head.next, n2 = head.next.next;
 		while (n2 != null && n2.next != null) {
 			if (n1 == n2) {
@@ -132,7 +132,7 @@ public class SinglyLinkedListProblems {
 
 	// https://www.geeksforgeeks.org/problems/given-a-linked-list-of-0s-1s-and-2s-sort-it/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=given-a-linked-list-of-0s-1s-and-2s-sort-it
 	// Function to sort a linked list of 0s, 1s and 2s.
-	static Node updateVal (Node head, int val, int count) {
+	static Node updateVal(Node head, int val, int count) {
 		Node temp = head;
 		while (temp != null && count > 0) {
 			temp.data = val;
@@ -175,7 +175,7 @@ public class SinglyLinkedListProblems {
 		if (head2 != null) {
 			if (head1 != null) tail1.next = head2;
 			else if (head0 != null) tail0.next = head2;
-			else    return head2;
+			else return head2;
 		}
 		if (head1 != null) {
 			if (head0 != null) tail0.next = head1;
@@ -199,6 +199,69 @@ public class SinglyLinkedListProblems {
 		// temp2 = updateVal(temp2, 1, count1);
 		// temp2 = updateVal(temp2, 2, count2);
 		// return head;
+	}
+
+	// https://www.geeksforgeeks.org/problems/add-1-to-a-number-represented-as-linked-list/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=add-1-to-a-number-represented-as-linked-list
+	// https://www.naukri.com/code360/problems/add-one-to-a-number-represented-as-linked-list_920557?utm_source=youtube&utm_medium=affiliate&utm_campaign=Codestudio_Linkedlistseries&leftPanelTabValue=SUBMISSION
+	// TC : O(3*N)
+	// SC : O(1)
+	public int addOneRec(Node head) {
+		if (head == null) {
+			return 1;
+		}
+
+		int sum = addOneRec(head.next) + head.data;
+		int carry = sum / 10;
+		int val = sum % 10;
+		head.data = val;
+		return carry;
+	}
+
+	public Node reverseLL(Node head) {
+		Node prev = null, temp = head;
+		while (temp != null) {
+			Node next = temp.next;
+			temp.next = prev;
+			prev = temp;
+			temp = next;
+		}
+		return prev;
+	}
+
+	public Node addOne(Node head) {
+		// code here.
+
+		// TC : O(n)
+		// SC : O(n) // recursion stack
+		int res = addOneRec(head);
+		if (res > 0) {
+			Node newNode = new Node(res);
+			newNode.next = head;
+			return newNode;
+		}
+		return head;
+
+		// TC : O(3N)
+		// SC : O(1)
+		// Node reverseList = reverseLL(head);
+		// Node temp = reverseList;
+		// int carry = 1, sum = 0;
+
+		// while(temp != null) {
+		//     sum = temp.data + carry;
+		//     temp.data = sum % 10;
+		//     carry = sum / 10;
+		//     temp = temp.next;
+		// }
+
+		// reverseList = reverseLL(reverseList);
+
+		// if (carry == 0) return reverseList;
+		// else {
+		//     Node newNode = new Node(carry);
+		//     newNode.next = reverseList;
+		//     return newNode;
+		// }
 	}
 
 }

@@ -329,4 +329,51 @@ public class SinglyLinkedListProblems {
 
 		return head;
 	}
+
+	// https://leetcode.com/problems/intersection-of-two-linked-lists/
+	public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
+
+		// TC : O(2n + m) or (2m + n) whichever is shorter
+		// SC : O(1)
+		int lenA = 0, lenB = 0;
+		ListNode tempA = headA, tempB = headB;
+		while (tempA != null) {
+			lenA++;
+			tempA = tempA.next;
+		}
+		while (tempB != null) {
+			lenB++;
+			tempB = tempB.next;
+		}
+		int diff = Math.abs(lenA - lenB);
+		tempA = (lenA > lenB) ? headA : headB;
+		tempB = (tempA == headA) ? headB : headA;
+		while (diff > 0) {
+			tempA = tempA.next;
+			diff--;
+		}
+		while (tempA != null && tempB != null) {
+			if (tempA == tempB) return tempA;
+			tempA = tempA.next;
+			tempB = tempB.next;
+		}
+		return null;
+
+		// TC : O(n + m) // assuming O(1) map operations
+		// SC : O(n)
+		// HashMap<ListNode, Boolean> mp = new HashMap<>();
+		// ListNode tempA = headA, tempB = headB;
+
+		// while (tempA != null) {
+		//     mp.put(tempA, true);
+		//     tempA = tempA.next;
+		// }
+		// while (tempB != null) {
+		//     if(mp.containsKey(tempB)) {
+		//         return tempB;
+		//     }
+		//     tempB = tempB.next;
+		// }
+		// return null;
+	}
 }
