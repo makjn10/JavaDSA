@@ -33,9 +33,9 @@ public class SinglyLinkedListProblems {
 	// TC : O(n)
 	// SC : O(n) (recursion stack)
 	// Recursive
-	public ListNode reverseList(ListNode head, ListNode nextNode) {
+	public ListNode reverseList(ListNode head, ListNode prevNode) {
 		ListNode temp = head.next;
-		head.next = nextNode;
+		head.next = prevNode;
 		if (temp == null) {
 			return head;
 		}
@@ -277,6 +277,7 @@ public class SinglyLinkedListProblems {
 		return head;
 	}
 
+	// https://leetcode.com/problems/add-two-numbers/
 	// TC : O(max(l1.length, l2.length))
 	// SC : O(1), O(n) for new LL
 	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {

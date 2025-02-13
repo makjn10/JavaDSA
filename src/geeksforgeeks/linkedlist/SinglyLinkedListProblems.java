@@ -130,5 +130,75 @@ public class SinglyLinkedListProblems {
 		// return 0;
 	}
 
+	// https://www.geeksforgeeks.org/problems/given-a-linked-list-of-0s-1s-and-2s-sort-it/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=given-a-linked-list-of-0s-1s-and-2s-sort-it
+	// Function to sort a linked list of 0s, 1s and 2s.
+	static Node updateVal (Node head, int val, int count) {
+		Node temp = head;
+		while (temp != null && count > 0) {
+			temp.data = val;
+			count--;
+			temp = temp.next;
+		}
+		return temp;
+	}
+
+	static Node segregate(Node head) {
+		// add your code here
+
+		// changing links (one-pass)
+		// TC : O(n)
+		// SC : O(1)
+		Node head0 = new Node(-1), tail0 = head0, head1 = new Node(-1), tail1 = head1, head2 = new Node(-1), tail2 = head2;
+		Node temp = head;
+
+		while (temp != null) {
+			if (temp.data == 0) {
+				tail0.next = temp;
+				tail0 = tail0.next;
+			} else if (temp.data == 1) {
+				tail1.next = temp;
+				tail1 = tail1.next;
+			} else {
+				tail2.next = temp;
+				tail2 = tail2.next;
+			}
+			temp = temp.next;
+		}
+
+		tail0.next = null;
+		tail1.next = null;
+		tail2.next = null;
+		head0 = head0.next;
+		head1 = head1.next;
+		head2 = head2.next;
+
+		if (head2 != null) {
+			if (head1 != null) tail1.next = head2;
+			else if (head0 != null) tail0.next = head2;
+			else    return head2;
+		}
+		if (head1 != null) {
+			if (head0 != null) tail0.next = head1;
+			else return head1;
+		}
+		return head0;
+
+		// brute-force (update val in node)
+		// TC : O(2n)
+		// SC : O(1)
+		// int count0 = 0, count1 = 0, count2 = 0;
+		// Node temp = head;
+		// while (temp != null) {
+		//     if (temp.data == 0) count0++;
+		//     else if (temp.data == 1) count1++;
+		//     else count2++;
+		//     temp = temp.next;
+		// }
+
+		// Node temp2 = updateVal(head, 0, count0);
+		// temp2 = updateVal(temp2, 1, count1);
+		// temp2 = updateVal(temp2, 2, count2);
+		// return head;
+	}
 
 }
