@@ -46,8 +46,11 @@ package williamFisset;
 // Things to remember/ patterns :
 // - Never tamper with head, always create a temporary var
 // - Tortoise/hare algorithm
+// - Variations in Tortoise algorithms by skipping slow or fast moves
 // - Timer logic and storing timer in hashmap
 // - First think on edge cases and then build on it when dealing with insertion/deletion
+// - Usage of Dummy Node while creating a new LL
+// - Reverse half LL
 
 import williamFisset.implementations.DoublyLinkedList;
 import williamFisset.implementations.SinglyLinkedList;

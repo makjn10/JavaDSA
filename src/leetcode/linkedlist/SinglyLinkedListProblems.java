@@ -262,4 +262,70 @@ public class SinglyLinkedListProblems {
 		s.next = s.next.next;
 		return head;
 	}
+
+	// https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/
+	// TC : O(n/2)
+	// SC : O(1)
+	public ListNode deleteMiddle(ListNode head) {
+		if (head == null || head.next == null) return null;
+		ListNode slow = head, fast = head.next.next;
+		while (fast != null && fast.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		slow.next = slow.next.next;
+		return head;
+	}
+
+	// TC : O(max(l1.length, l2.length))
+	// SC : O(1), O(n) for new LL
+	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+
+		ListNode prev = null, curr = null, head = null;
+		int sum = 0, carry = 0;
+
+		while (l1 != null && l2 != null) {
+			sum = (carry + l1.val + l2.val) % 10;
+			carry = (carry + l1.val + l2.val) / 10;
+			curr = new ListNode(sum);
+			if (prev != null) {
+				prev.next = curr;
+			} else {
+				head = curr;
+			}
+			prev = curr;
+			l1 = l1.next;
+			l2 = l2.next;
+		}
+		while (l1 != null) {
+			sum = (carry + l1.val) % 10;
+			carry = (carry + l1.val) / 10;
+			curr = new ListNode(sum);
+			if (prev != null) {
+				prev.next = curr;
+			} else {
+				head = curr;
+			}
+			prev = curr;
+			l1 = l1.next;
+		}
+		while (l2 != null) {
+			sum = (carry + l2.val) % 10;
+			carry = (carry + l2.val) / 10;
+			curr = new ListNode(sum);
+			if (prev != null) {
+				prev.next = curr;
+			} else {
+				head = curr;
+			}
+			prev = curr;
+			l2 = l2.next;
+		}
+		if (carry != 0) {
+			curr = new ListNode(carry);
+			prev.next = curr;
+		}
+
+		return head;
+	}
 }
