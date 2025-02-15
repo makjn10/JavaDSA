@@ -1,6 +1,7 @@
 package leetcode.linkedlist;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class SinglyLinkedListProblems {
 
@@ -333,31 +334,47 @@ public class SinglyLinkedListProblems {
 	// https://leetcode.com/problems/intersection-of-two-linked-lists/
 	public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
 
-		// TC : O(2n + m) or (2m + n) whichever is shorter
+		// TC : O(n + m)
 		// SC : O(1)
-		int lenA = 0, lenB = 0;
-		ListNode tempA = headA, tempB = headB;
-		while (tempA != null) {
-			lenA++;
-			tempA = tempA.next;
-		}
-		while (tempB != null) {
-			lenB++;
-			tempB = tempB.next;
-		}
-		int diff = Math.abs(lenA - lenB);
-		tempA = (lenA > lenB) ? headA : headB;
-		tempB = (tempA == headA) ? headB : headA;
-		while (diff > 0) {
-			tempA = tempA.next;
-			diff--;
-		}
+		ListNode tempA = headA;
+		ListNode tempB = headB;
+
 		while (tempA != null && tempB != null) {
+			if (tempA.next == null && tempB.next == null && tempA != tempB) return null;
 			if (tempA == tempB) return tempA;
-			tempA = tempA.next;
-			tempB = tempB.next;
+
+			if (tempA.next == null) tempA = headB;
+			else tempA = tempA.next;
+			if (tempB.next == null) tempB = headA;
+			else tempB = tempB.next;
 		}
 		return null;
+
+		// TC : O(2n + m) or (2m + n) whichever is shorter
+		// SC : O(1)
+		// int lenA = 0, lenB = 0;
+		// ListNode tempA = headA, tempB = headB;
+		// while (tempA != null) {
+		//     lenA++;
+		//     tempA = tempA.next;
+		// }
+		// while (tempB != null) {
+		//     lenB++;
+		//     tempB = tempB.next;
+		// }
+		// int diff = Math.abs(lenA - lenB);
+		// tempA = (lenA > lenB) ? headA : headB;
+		// tempB = (tempA == headA) ? headB : headA;
+		// while (diff > 0) {
+		//     tempA = tempA.next;
+		//     diff--;
+		// }
+		// while (tempA != null && tempB != null) {
+		//     if (tempA == tempB) return tempA;
+		//     tempA = tempA.next;
+		//     tempB = tempB.next;
+		// }
+		// return null;
 
 		// TC : O(n + m) // assuming O(1) map operations
 		// SC : O(n)
@@ -375,5 +392,141 @@ public class SinglyLinkedListProblems {
 		//     tempB = tempB.next;
 		// }
 		// return null;
+	}
+
+	// https://leetcode.com/problems/sort-list/description/
+	// TC : O(N + M)
+	public ListNode mergeTwoSortedLL(ListNode l1, ListNode l2) {
+		if (l1 == null) return l2;
+		if (l2 == null) return l1;
+
+		ListNode head = new ListNode(-1);
+		ListNode tail = head;
+
+		while (l1 != null && l2 != null) {
+			if (l2.val < l1.val) {
+				tail.next = l2;
+				l2 = l2.next;
+			} else {
+				tail.next = l1;
+				l1 = l1.next;
+			}
+			tail = tail.next;
+		}
+		tail.next = (l1 != null) ? l1 : l2;
+		return head.next;
+	}
+
+	public ListNode mergeSortList(ListNode head) {
+		if (head == null || head.next == null) return head;
+
+		ListNode slow = head, fast = head.next;
+		while (fast != null && fast.next != null) {
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		ListNode temp = slow.next;
+		slow.next = null;
+
+		ListNode leftSorted = mergeSortList(head);
+		ListNode rightSorted = mergeSortList(temp);
+		return mergeTwoSortedLL(leftSorted, rightSorted);
+	}
+
+	public ListNode sortList(ListNode head) {
+		// TC : O((n/2 + n) * log n)
+		// SC : O(1)
+		// divide the LL in two
+		// sort divided LLs
+		// Merge sorted LLs
+		return mergeSortList(head);
+
+		// Keep an array, sort the array and change vals in LL
+		// TC : O(n + nlogn + n)
+		// SC : O(n)
+		// ArrayList<Integer> list = new ArrayList<>();
+
+		// ListNode temp = head;
+		// while (temp != null) {
+		//     list.add(temp.val);
+		//     temp = temp.next;
+		// }
+		// Collections.sort(list);
+
+		// temp = head;
+		// int index = 0;
+		// while (temp != null) {
+		//     temp.val = list.get(index);
+		//     temp = temp.next;
+		//     index++;
+		// }
+
+		// return head;
+	}
+
+	// https://leetcode.com/problems/reverse-nodes-in-k-group/
+	public void reverseArrGroup(List<Integer> arr, int l, int r) {
+		if (r >= arr.size()) return;
+		while (l < r) {
+			int temp = arr.get(l);
+			arr.set(l, arr.get(r));
+			arr.set(r, temp);
+			l++;
+			r--;
+		}
+	}
+	public ListNode reverseKGroup(ListNode head, int k) {
+
+		// TC : O(2 * n)
+		// SC : O(1)
+		// Keep A counter, reverse list in groups and adjust pointers appropriately
+		if (k <= 1) return head;
+
+		ListNode currHead = null, masterHead = null, tail = null, temp = head;
+		int counter = 0;
+
+		while (temp != null) {
+			counter++;
+			if (counter == 1) {
+				currHead = temp;
+			}
+
+			if (counter == k) {
+				counter = 0;
+				ListNode tempNext = temp.next;
+				temp.next = null;
+				ListNode newHead = reverseList(currHead);
+				if (masterHead == null) masterHead = newHead;
+				if (tail != null) tail.next = newHead;
+				tail = currHead;
+				temp = tempNext;
+			} else {
+				temp = temp.next;
+			}
+
+		}
+		if (counter != 0) {
+			if (tail != null) tail.next = currHead;
+			else return currHead;
+		}
+		return masterHead;
+
+		// TC : O(n + n + n)
+		// SC : O(n)
+		// List<Integer> arr = new ArrayList<>();
+		// ListNode temp = head;
+		// while (temp != null) {
+		//     arr.add(temp.val);
+		//     temp = temp.next;
+		// }
+		// for (int i = 0; i < arr.size(); i += k) {
+		//     reverseArrGroup(arr, i, i + k - 1);
+		// }
+		// temp = head;
+		// for (int ele : arr) {
+		//     temp.val = ele;
+		//     temp = temp.next;
+		// }
+		// return head;
 	}
 }
