@@ -1,5 +1,6 @@
 package leetcode.linkedlist;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,6 +12,18 @@ public class SinglyLinkedListProblems {
 
 		ListNode(int x) {
 			val = x;
+		}
+	}
+
+	public static class Node {
+		int val;
+		Node next;
+		Node random;
+
+		public Node(int val) {
+			this.val = val;
+			this.next = null;
+			this.random = null;
 		}
 	}
 
@@ -475,6 +488,7 @@ public class SinglyLinkedListProblems {
 			r--;
 		}
 	}
+
 	public ListNode reverseKGroup(ListNode head, int k) {
 
 		// TC : O(2 * n)
@@ -528,5 +542,62 @@ public class SinglyLinkedListProblems {
 		//     temp = temp.next;
 		// }
 		// return head;
+	}
+
+	// https://leetcode.com/problems/copy-list-with-random-pointer/submissions/1544868637/
+	public Node copyRandomList(Node head) {
+		// TC : O(3N)
+		// SC : O(N) for output
+		if (head == null) return head;
+		Node temp = head, newHead = null;
+		while (temp != null) {
+			Node newNode = new Node(temp.val);
+			if (newHead == null) {
+				newHead = newNode;
+			}
+			Node tempNext = temp.next;
+			temp.next = newNode;
+			newNode.next = tempNext;
+			temp = tempNext;
+		}
+		temp = head;
+		while (temp != null) {
+			if (temp.random == null) temp.next.random = null;
+			else temp.next.random = temp.random.next;
+			temp = temp.next.next;
+		}
+		temp = head;
+		while (temp != null) {
+			Node tempNext = temp.next;
+			temp.next = temp.next.next;
+			temp = temp.next;
+			if (temp != null) {
+				tempNext.next = temp.next;
+			} else {
+				tempNext.next = null;
+			}
+		}
+		return newHead;
+
+		// TC : O(2*N) // assuming O(1) map operatons
+		// SC : O(N) map + O(N) new LL
+		// if (head == null) {
+		//     return null;
+		// }
+		// Node temp = head, newHead = new Node(-1), tail = newHead;
+		// HashMap<Node, Node> map = new HashMap<>();
+		// while (temp != null) {
+		//     Node newNode = new Node(temp.val);
+		//     map.put(temp, newNode);
+		//     tail.next = newNode;
+		//     tail = newNode;
+		//     temp = temp.next;
+		// }
+		// temp = head;
+		// while (temp != null) {
+		//     map.get(temp).random = map.get(temp.random);
+		//     temp = temp.next;
+		// }
+		// return newHead.next;
 	}
 }

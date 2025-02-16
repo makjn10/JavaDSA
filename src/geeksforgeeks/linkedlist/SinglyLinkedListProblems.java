@@ -15,6 +15,17 @@ public class SinglyLinkedListProblems {
 			data = d;
 		}  //constructor to create a new node
 	}
+	private static class Node2 {
+		int data;
+		Node2 next;
+		Node2 bottom;
+
+		Node2(int d) {
+			data = d;
+			next = null;
+			bottom = null;
+		}  //constructor to create a new node
+	}
 
 	// https://www.geeksforgeeks.org/problems/introduction-to-linked-list/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=introduction-to-linked-list
 	// TC : O(n)
@@ -262,6 +273,74 @@ public class SinglyLinkedListProblems {
 		//     newNode.next = reverseList;
 		//     return newNode;
 		// }
+	}
+
+	// https://www.geeksforgeeks.org/problems/flattening-a-linked-list/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=flattening-a-linked-list
+	// Function to flatten a linked list
+	Node2 mergeSortedSubLists(Node2 node1, Node2 node2) {
+		Node2 head = new Node2(-1), tail = head;
+		Node2 temp1 = node1, temp2 = node2;
+		while (temp1 != null && temp2 != null) {
+			if (temp1.data < temp2.data) {
+				tail.bottom = temp1;
+				tail = temp1;
+				temp1 = temp1.bottom;
+
+			} else {
+				tail.bottom = temp2;
+				tail = temp2;
+				temp2 = temp2.bottom;
+			}
+			tail.next = null;
+			tail.bottom = null;
+		}
+		if (temp1 != null) {
+			tail.bottom = temp1;
+		}
+		if (temp2 != null) {
+			tail.bottom = temp2;
+		}
+		return head.bottom;
+	}
+
+	Node2 flatten(Node2 root) {
+		// TC : O(N^2 * M)
+		// SC : O(1)
+		// merge two sorted sub-lists
+		if (root == null || root.next == null) {
+			return root;
+		}
+
+		Node2 t1 = root, t2 = root.next;
+		while (t2 != null) {
+			Node2 t2Next = t2.next;
+			t1 = mergeSortedSubLists(t1, t2);
+			t2 = t2Next;
+		}
+		return t1;
+
+		// code here
+		// TC : O(nm + nmlognm + nm)
+		// SC : O(nm + nm)
+		// Node2 temp = root;
+		// List<Integer> arr = new ArrayList<>();
+		// while (temp != null) {
+		//     arr.add(temp.data);
+		//     Node2 bottom = temp.bottom;
+		//     while (bottom != null) {
+		//         arr.add(bottom.data);
+		//         bottom = bottom.bottom;
+		//     }
+		//     temp = temp.next;
+		// }
+		// Collections.sort(arr);
+
+		// Node2 newNode = new Node(-1), tail = newNode;
+		// for (int ele : arr) {
+		//     tail.bottom = new Node2(ele);
+		//     tail = tail.bottom;
+		// }
+		// return newNode.bottom;
 	}
 
 }
