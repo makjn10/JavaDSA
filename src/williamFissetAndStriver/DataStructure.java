@@ -1,4 +1,4 @@
-package williamFisset;
+package williamFissetAndStriver;
 
 // A DS is a way of organizing data so that it can be accessed, queried or updated easily and efficiently
 // Essential ingredients in creating fast and powerful algorithms
@@ -11,7 +11,6 @@ package williamFisset;
 //    - Map -> Tree, Hash Map
 
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class DataStructure {

@@ -1,4 +1,4 @@
-package williamFisset.implementations;
+package williamFissetAndStriver.implementations;
 
 public interface LinkedListInterface<T> extends Iterable<T> {
 	void addLast(T ele);

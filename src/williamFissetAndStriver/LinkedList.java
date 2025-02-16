@@ -1,4 +1,4 @@
-package williamFisset;
+package williamFissetAndStriver;
 
 // Linked list is a sequential list of nodes that hold data which point to other node also containing data
 // Where are LLs used?
@@ -52,8 +52,8 @@ package williamFisset;
 // - Usage of Dummy Node while creating a new LL
 // - Reverse half LL
 
-import williamFisset.implementations.DoublyLinkedList;
-import williamFisset.implementations.SinglyLinkedList;
+import williamFissetAndStriver.implementations.DoublyLinkedList;
+import williamFissetAndStriver.implementations.SinglyLinkedList;
 
 public class LinkedList {
 	public static void main(String[] args) {

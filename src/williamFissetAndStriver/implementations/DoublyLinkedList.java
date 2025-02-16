@@ -1,4 +1,4 @@
-package williamFisset.implementations;
+package williamFissetAndStriver.implementations;
 
 import java.util.Iterator;
 

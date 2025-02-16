@@ -1,4 +1,4 @@
-package williamFisset;
+package williamFissetAndStriver;
 
 // static array
 // static array is a fixed length container containing n elements indexable from range [0, n - 1]
@@ -27,7 +27,7 @@ package williamFisset;
 // Appending : NA, O(1) -> resizing of static array happens very often
 // Deletion : NA : O(1)
 
-import williamFisset.implementations.DynamicArray;
+import williamFissetAndStriver.implementations.DynamicArray;
 
 public class Arrays {
 	public static void main(String[] args) {

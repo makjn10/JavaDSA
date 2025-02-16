@@ -1,6 +1,5 @@
-package williamFisset.implementations;
+package williamFissetAndStriver.implementations;
 
-import java.util.Iterator;
 import java.util.Objects;
 import java.util.Spliterator;
 import java.util.function.Consumer;
