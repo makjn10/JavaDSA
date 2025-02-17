@@ -4,6 +4,14 @@ package williamFissetAndStriver;
 // Binary Search is applicable when data is monotonically sorted
 // Everything between low and high is search space
 
+// lower bound : smallest index of ele which is greater or equal to x in a sorted array
+// upper bound : smallest index of ele greater than x in a sorted array
+
+// Patterns :
+//	- Normal BS (==, >, <)
+//	- Only two possibilities (>= and <) or (<= and >) like finding upper bound etc.
+//  - Many problems can be solved using lower bound and upper bound. But take care of extreme cases like elem not present in array etc.
+
 
 public class BinarySearch {
 
