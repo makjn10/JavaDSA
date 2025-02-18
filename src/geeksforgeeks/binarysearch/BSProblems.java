@@ -27,7 +27,7 @@ public class BSProblems {
 	}
 
 	// https://www.naukri.com/code360/problems/lower-bound_8165382?utm_source=youtube&utm_medium=affiliate&utm_campaign=codestudio_Striver_BinarySeries&leftPanelTabValue=SUBMISSION
-	public static int lowerBound(int []arr, int n, int x) {
+	public static int lowerBound(int[] arr, int n, int x) {
 		// Write your code here
 		// the smallest index of the element greater or equal to x
 		int low = 0, high = n - 1, index = n;
@@ -43,5 +43,37 @@ public class BSProblems {
 		return index;
 	}
 
+	// https://www.geeksforgeeks.org/problems/number-of-occurrence2259/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=number-of-occurrence
+	int firstOccurrence(int[] nums, int target) {
+		int low = 0, high = nums.length - 1, index = -1;
+		while (low <= high) {
+			int mid = low + (high - low) / 2;
+			if (nums[mid] == target) {
+				index = mid;
+				high = mid - 1;
+			} else if (nums[mid] > target) high = mid - 1;
+			else low = mid + 1;
+		}
+		return index;
+	}
 
+	int lastOccurrence(int[] nums, int target) {
+		int low = 0, high = nums.length - 1, index = -1;
+		while (low <= high) {
+			int mid = low + (high - low) / 2;
+			if (nums[mid] == target) {
+				index = mid;
+				low = mid + 1;
+			} else if (nums[mid] > target) high = mid - 1;
+			else low = mid + 1;
+		}
+		return index;
+	}
+
+	int countFreq(int[] arr, int target) {
+		// code here
+		int firstOccurrence = firstOccurrence(arr, target);
+		if (firstOccurrence == -1) return 0;
+		else return lastOccurrence(arr, target) - firstOccurrence + 1;
+	}
 }
