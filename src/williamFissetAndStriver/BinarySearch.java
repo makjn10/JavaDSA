@@ -11,7 +11,8 @@ package williamFissetAndStriver;
 //	- Normal BS (==, >, <)
 //	- Only two possibilities (>= and <) or (<= and >) like finding upper bound etc.
 //  - Many problems can be solved using lower bound and upper bound. But take care of extreme cases like elem not present in array etc.
-
+//  - When duplicates present try to solve for unique and trim down in case of duplicates
+//	- Eliminate left or right half on certain conditions, eg : search in rotated sorted array-> either left half sorted or right half
 
 public class BinarySearch {
 
