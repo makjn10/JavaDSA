@@ -1,5 +1,7 @@
 package geeksforgeeks.binarysearch;
 
+import java.util.List;
+
 public class BSProblems {
 	// https://www.geeksforgeeks.org/problems/floor-in-a-sorted-array-1587115620/1?track=DSASP-Searching&amp%253BbatchId=154&utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=floor-in-a-sorted-array
 	static int findFloor(int[] arr, int k) {
@@ -75,5 +77,25 @@ public class BSProblems {
 		int firstOccurrence = firstOccurrence(arr, target);
 		if (firstOccurrence == -1) return 0;
 		else return lastOccurrence(arr, target) - firstOccurrence + 1;
+	}
+
+	// https://www.geeksforgeeks.org/problems/rotation4723/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=rotation
+	// TC : O(log n)
+	// SC : O(1)
+	public int findInvertedEndIndex(List<Integer> nums) {
+		int lo = 0, hi = nums.size() - 1;
+		while (lo <= hi) {
+			int mid = lo + (hi - lo) / 2;
+			if (mid == (nums.size() - 1))  return -1;
+			if (nums.get(mid) > nums.get(mid + 1))  return mid;
+			else if (nums.get(mid) < nums.get(nums.size() - 1)) hi = mid - 1;
+			else lo = mid + 1;
+		}
+		return -1;
+	}
+
+	public int findKRotation(List<Integer> arr) {
+		// Code here
+		return findInvertedEndIndex(arr) + 1;
 	}
 }

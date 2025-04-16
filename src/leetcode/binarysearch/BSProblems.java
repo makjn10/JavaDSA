@@ -171,5 +171,54 @@ public class BSProblems {
 		return nums[invertedIndex + 1];
 	}
 
+	// https://leetcode.com/problems/single-element-in-a-sorted-array/
+	public int singleNonDuplicate(int[] nums) {
+		int lo = 0, hi = nums.length - 1;
+		while (lo <= hi) {
+			int mid = lo + (hi - lo) / 2;
+			if ((mid == 0 || nums[mid - 1] != nums[mid]) && ((mid == nums.length - 1) || nums[mid + 1] != nums[mid])) {
+				return nums[mid];
+			} else {
+				int secondI = -1;
+				if (mid != 0 && nums[mid - 1] == nums[mid])  secondI = mid;
+				else secondI = mid + 1;
 
+				if((secondI - lo + 1) % 2 == 0) lo = secondI + 1;
+				else hi = secondI - 2;
+			}
+		}
+		return -1;
+	}
+
+	// https://leetcode.com/problems/find-peak-element/
+	public int findPeakElement(int[] nums) {
+		// TC : O(log n)
+		// SC : O(n)
+		int n = nums.length;
+		if(n == 1)   return 0;
+		if(nums[0] > nums[1])   return 0;
+		if(nums[n - 1] > nums[n - 2])   return n - 1;
+
+		int lo = 1, hi = n - 2;
+		while(lo <= hi) {
+			int mid = lo + (hi - lo) / 2;
+			if (nums[mid] > nums[mid - 1] && nums[mid] > nums[mid + 1]) return mid;
+			else if (nums[mid] > nums[mid - 1]) lo = mid + 1;
+			else if (nums[mid] < nums[mid - 1]) hi = mid - 1;
+			else lo = mid + 1;
+		}
+		return -1;
+
+		// brute force
+		// TC : O(n)
+		// SC : O(1)
+		// if (nums == null || nums.length == 0)   return -1;
+		// long left, right;
+		// for (int i = 0; i < nums.length; i++) {
+		//     left = i != 0 ? nums[i - 1] : Long.MIN_VALUE;
+		//     right = i != nums.length - 1 ? nums[i + 1] : Long.MIN_VALUE;
+		//     if (left < nums[i] && nums[i] > right)  return i;
+		// }
+		// return -1;
+	}
 }

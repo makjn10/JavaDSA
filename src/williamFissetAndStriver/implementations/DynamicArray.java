@@ -21,6 +21,7 @@ public class DynamicArray <T> implements Iterable <T>{
 		this.capacity = capacity;
 	}
 
+	// O(1) TC
 	public int size() {
 		return len;
 	}
@@ -29,6 +30,7 @@ public class DynamicArray <T> implements Iterable <T>{
 		return len == 0;
 	}
 
+	// O(1) TC complexity, O(n) in case of resizing which happens few times
 	public void add(T ele) {
 		if (len >= capacity) {
 			capacity *= 2;
@@ -41,16 +43,19 @@ public class DynamicArray <T> implements Iterable <T>{
 		arr[len++] = ele;
 	}
 
+	// O(1) TC
 	public T get(int index) {
 		if(index >= len || index < 0)	throw new IndexOutOfBoundsException();
 		return arr[index];
 	}
 
+	// O(1) TC
 	public void set(int index, T ele) {
 		if(index >= len || index < 0)	throw new IndexOutOfBoundsException();
 		arr[index] = ele;
 	}
 
+	// O(n) TC
 	public T removeAt(int index) {
 		if(index >= len || index < 0)	throw new IndexOutOfBoundsException();
 		T ele = arr[index];
@@ -63,6 +68,7 @@ public class DynamicArray <T> implements Iterable <T>{
 		return ele;
 	}
 
+	// O(n) TC
 	public boolean remove(T ele) {
 		for (int i = 0; i < len; i++) {
 			if(Objects.equals(ele, arr[i])) {
@@ -73,6 +79,7 @@ public class DynamicArray <T> implements Iterable <T>{
 		return false;
 	}
 
+	// O(n) TC
 	public void clear() {
 		for (int i = 0; i < capacity; i++) {
 			arr[i] = null;
@@ -80,6 +87,7 @@ public class DynamicArray <T> implements Iterable <T>{
 		len = 0;
 	}
 
+	// O(n) TC
 	public int indexOf(T ele) {
 		for (int i = 0; i < len; i++) {
 			if(Objects.equals(ele, arr[i])) {
@@ -89,7 +97,8 @@ public class DynamicArray <T> implements Iterable <T>{
 		return -1;
 	}
 
-	public void reverse() {
+	// O(n) TC
+ 	public void reverse() {
 		int i = 0, j = len - 1;
 		while (i < j) {
 			T temp = arr[i];

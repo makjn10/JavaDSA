@@ -17,7 +17,7 @@ package williamFissetAndStriver;
 // 	- Using static array
 //		- Create a static array with an initial capacity
 //		- Add elements to static array, keep track of number of elements
-//		- If adding another element exceeds capacity, create new astatic array with twice the capacity and copy original elements to it.
+//		- If adding another element exceeds capacity, create a new static array with twice the capacity and copy original elements to it.
 
 
 // Time Complexities (static and dynamic (using static array implementation) arrays)
